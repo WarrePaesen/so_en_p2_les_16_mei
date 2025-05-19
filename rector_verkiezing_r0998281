@@ -1,0 +1,35 @@
+# rector_verkiezing_r0998281.py
+
+from verkiezing import Kandidaat,Stem, Kiezer
+class RectorKandidaat(Kandidaat):
+    def __init__(self, naam, faculteit):
+        super().__init__(naam)
+        self.faculteit = faculteit
+
+    def __str__(self):
+        return f"{self.naam} (Rector: {self.faculteit})"
+    
+class RectorStem(Stem):
+    def __init__(self, kandidaat, faculteit):
+        super().__init__(kandidaat)
+        self.faculteit = faculteit
+
+    def __str__(self):
+        return f"Stem op {self.kandidaat} (Rector: {self.faculteit})"
+
+kandidaten = [
+    RectorKandidaat("Anna", "Faculteit Wetenschappen"),
+    RectorKandidaat("Pieter", "Faculteit Letteren"),
+    RectorKandidaat("Maria", "Faculteit Geneeskunde"),
+    RectorKandidaat("Ahmed", "Faculteit Ingenieurswetenschappen")
+]
+
+kiezers = [
+    Kiezer("Sophie", "Faculteit Wetenschappen"),
+    Kiezer("Thomas", "Faculteit Letteren"),
+    Kiezer("Emma", "Faculteit Geneeskunde")
+]
+kiezers[0].stem_op(kandidaten[0])  # Sophie stemt op Anna Janssen
+kiezers[1].stem_op(kandidaten[1])  # Thomas stemt op Pieter Vries
+
+print(f"\n{kiezers[0].naam} heeft gestemd op: {kiezers[0].stem.kandidaat.naam}")
